@@ -8,9 +8,27 @@
 		"project": "./tsconfig.json"
 	},
 	"rules": {
-		"@typescript-eslint/naming-convention": "warn",
-		"@typescript-eslint/no-unsafe-return": "warn",
+		"@typescript-eslint/naming-convention": "off",
+		"@typescript-eslint/no-unsafe-return": "off",
+		"@typescript-eslint/no-unsafe-call": "off",
+		"@typescript-eslint/no-unsafe-assignment": "off",
+		"@typescript-eslint/no-floating-promises": "off",
 		"@typescript-eslint/restrict-template-expressions": "warn",
-		"new-cap": "warn"
+		"@typescript-eslint/no-require-imports": "off",
+		"@typescript-eslint/no-var-requires": "off",
+		"new-cap": "off",
+		"no-console": "warn",
+		"max-lines": [
+			"error",
+			300
+		],
+		"max-params": [
+			"error",
+			6
+		],
+		"max-depth": [
+			"error",
+			3
+		]
 	}
 }

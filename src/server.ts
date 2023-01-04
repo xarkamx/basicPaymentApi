@@ -1,14 +1,17 @@
 // Require library to exit fastify process, gracefully (if possible)
+import jwt from "@fastify/jwt";
 import closeWithGrace from "close-with-grace";
 import * as dotenv from "dotenv";
 // Require the framework
 import Fastify from "fastify";
 
+import Db from "./db";
 import { initGraphql } from "./graphql";
 import { initSwagger } from "./swagger";
 
 // Read the .env file.
 dotenv.config();
+Db.getInstance();
 
 const isProduction = process.env.NODE_ENV === "production";
 // Instantiate Fastify with some config
@@ -16,6 +19,10 @@ const app = Fastify({
   logger: !isProduction,
 });
 
+// Register JWT
+void app.register<{ secret: any }>(jwt, {
+  secret: process.env.JWT_SECRET,
+});
 // Register your application as a normal plugin.
 void app.register(import("./app"));
 
@@ -37,6 +44,14 @@ const closeListeners = closeWithGrace({ delay: 500 }, async (opts: any) => {
 app.addHook("onClose", async (_instance, done) => {
   closeListeners.uninstall();
   done();
+});
+
+app.addHook("onRequest", async (request, reply) => {
+  try {
+    await request.jwtVerify();
+  } catch (err) {
+    reply.send(err);
+  }
 });
 
 // Start listening.

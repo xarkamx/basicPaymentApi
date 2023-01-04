@@ -5,10 +5,10 @@ import type { FastifyPluginAsync } from "fastify";
 import LoginBody from "../../schemas/login_body.json";
 import type { LoginBodySchema } from "../../types/login_body";
 
-const UserToken = Type.Object({
+const userToken = Type.Object({
   token: Type.String(),
 });
-type UserTokenType = Static<typeof UserToken>;
+type UserTokenType = Static<typeof userToken>;
 
 const user: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
   // Refer https://swagger.io/docs/specification/describing-request-body/

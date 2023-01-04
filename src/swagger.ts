@@ -55,10 +55,10 @@ export async function initSwagger(app: FastifyInstance) {
       deepLinking: false,
     },
     uiHooks: {
-      onRequest (request, reply, next) {
+      onRequest(request, reply, next) {
         next();
       },
-      preHandler (request, reply, next) {
+      preHandler(request, reply, next) {
         next();
       },
     },
