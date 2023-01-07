@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "yarn build:ts",
+  "buildCommand": "npm run build:ts",
   "builds": {
     "src": "api/serverless.js",
     "use": "@vercel/node"
