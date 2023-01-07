@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "npm run build:ts",
+  // "buildCommand": "npm run build:ts",
   "builds": {
-    "src": "api/serverless.js",
+    "src": "*.js",
     "use": "@vercel/node"
   },
   "rewrites": [
