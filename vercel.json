@@ -1,8 +1,10 @@
 {
   "version": 2,
+  "buildCommand": "yarn build:ts",
   "builds": [
     {
-      "src": "package.json"
+      "src": "./dist/server.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
