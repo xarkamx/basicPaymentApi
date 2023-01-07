@@ -8,7 +8,7 @@ export type PaymentDetails = {
   capture?: boolean;
 };
 export class StripeAuthorizePayment {
-  constructor(readonly mail: string) {}
+  constructor(readonly appId: string) {}
 
   async captureTransaction(payment: PaymentDetails) {
     payment.capture = false;
@@ -86,7 +86,7 @@ export class StripeAuthorizePayment {
   }
 
   private async loadStripe() {
-    const apiServices = new ApiKeysService(this.mail);
+    const apiServices = new ApiKeysService(this.appId);
     const key = await apiServices.getKeyByProvider("stripe", "secret");
     return stripeLoader(key.value);
   }

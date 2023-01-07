@@ -10,6 +10,7 @@ const apiServices: FastifyPluginAsync = async (
     method: "GET",
     url: "/",
     schema: {
+      public: true,
       response: {
         200: {
           type: "array",
@@ -25,8 +26,7 @@ const apiServices: FastifyPluginAsync = async (
       },
     },
     async handler(request: any, reply) {
-      const { email } = request.user;
-      const apiKeys = new ApiKeysService(email);
+      const apiKeys = new ApiKeysService("");
       const keys = await apiKeys.getAll();
       reply.send(keys);
     },
@@ -36,9 +36,9 @@ const apiServices: FastifyPluginAsync = async (
     url: "/",
     async handler(request: any, reply) {
       const { provider, value, type } = request.body;
-      const { email } = request.user;
+      const { appId } = request.user;
       try {
-        const apiKeys = new ApiKeysService(email);
+        const apiKeys = new ApiKeysService(appId);
         await apiKeys.create({ provider, value, type });
         reply.code(201);
       } catch (err) {

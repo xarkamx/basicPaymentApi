@@ -15,8 +15,8 @@ const stripeApi: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
       body: captureSchema,
     },
     async handler(request: any, reply) {
-      const { email } = request.user;
-      const stripeService = new StripeAuthorizePayment(email);
+      const { appId } = request.user;
+      const stripeService = new StripeAuthorizePayment(appId);
       const paymentDetails: PaymentDetails = {
         amount: request.body.amount,
         currency: request.body.currency,
@@ -30,8 +30,8 @@ const stripeApi: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
     method: "GET",
     url: "/authorizations",
     async handler(request: any, reply) {
-      const { email } = request.user;
-      const stripeService = new StripeAuthorizePayment(email);
+      const { appId } = request.user;
+      const stripeService = new StripeAuthorizePayment(appId);
       const authorizations = await stripeService.getAllAuthorizations();
       reply.send(authorizations);
     },
@@ -40,8 +40,8 @@ const stripeApi: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
     method: "GET",
     url: "/authorizations/:id",
     async handler(request: any, reply) {
-      const { email } = request.user;
-      const stripeService = new StripeAuthorizePayment(email);
+      const { appId } = request.user;
+      const stripeService = new StripeAuthorizePayment(appId);
       const authorization = await stripeService.getAuthorization(
         request.params.id
       );
@@ -52,8 +52,8 @@ const stripeApi: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
     method: "POST",
     url: "/authorizations/:id/approve",
     async handler(request: any, reply) {
-      const { email } = request.user;
-      const stripeService = new StripeAuthorizePayment(email);
+      const { appId } = request.user;
+      const stripeService = new StripeAuthorizePayment(appId);
       const authorization = await stripeService.approveAuthorization(
         request.params.id
       );
@@ -71,8 +71,8 @@ const stripeApi: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
     method: "GET",
     url: "/charges",
     async handler(request: any, reply) {
-      const { email } = request.user;
-      const stripeService = new StripeAuthorizePayment(email);
+      const { appId } = request.user;
+      const stripeService = new StripeAuthorizePayment(appId);
       const charges = await stripeService.getAllCharges();
       reply.send(charges);
     },
@@ -81,8 +81,8 @@ const stripeApi: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
     method: "POST",
     url: "/charges/:id/capture",
     async handler(request: any, reply) {
-      const { email } = request.user;
-      const stripeService = new StripeAuthorizePayment(email);
+      const { appId } = request.user;
+      const stripeService = new StripeAuthorizePayment(appId);
       const charge = await stripeService.captureCharge(request.params.id);
       reply.send(charge);
     },
@@ -94,8 +94,8 @@ const stripeApi: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
       body: intent,
     },
     async handler(request: any, reply) {
-      const { email } = request.user;
-      const stripeService = new StripeAuthorizePayment(email);
+      const { appId } = request.user;
+      const stripeService = new StripeAuthorizePayment(appId);
       const intent = await stripeService.createIntent(request.body);
       reply.send(intent);
     },
@@ -104,8 +104,8 @@ const stripeApi: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
     method: "POST",
     url: "/intent/:id/capture",
     async handler(request: any, reply) {
-      const { email } = request.user;
-      const stripeService = new StripeAuthorizePayment(email);
+      const { appId } = request.user;
+      const stripeService = new StripeAuthorizePayment(appId);
       const intent = await stripeService.captureIntent(request.params.id);
       reply.send(intent);
     },
@@ -114,8 +114,8 @@ const stripeApi: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
     method: "DELETE",
     url: "/intent/:id",
     async handler(request: any, reply) {
-      const { email } = request.user;
-      const stripeService = new StripeAuthorizePayment(email);
+      const { appId } = request.user;
+      const stripeService = new StripeAuthorizePayment(appId);
       const intent = await stripeService.cancelIntent(request.params.id);
       reply.send(intent);
     },
