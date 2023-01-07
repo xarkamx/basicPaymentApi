@@ -48,7 +48,7 @@ app.addHook("onClose", async (_instance, done) => {
 
 app.addHook("onRequest", async (request: any, reply) => {
   try {
-    if (request.routeSchema.public) {
+    if (request.routeSchema?.public) {
       return;
     }
 
