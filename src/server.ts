@@ -6,7 +6,6 @@ import * as dotenv from "dotenv";
 import Fastify from "fastify";
 
 import Db from "./db";
-import { initGraphql } from "./graphql";
 import { initSwagger } from "./swagger";
 
 // Read the .env file.
@@ -27,7 +26,6 @@ void app.register<{ secret: any }>(jwt, {
 void app.register(import("./app"));
 
 // Init graphql
-void initGraphql(app);
 
 // Init Swagger
 void initSwagger(app);
