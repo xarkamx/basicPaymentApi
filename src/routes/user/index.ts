@@ -2,9 +2,6 @@ import type { Static } from "@sinclair/typebox";
 import { Type } from "@sinclair/typebox";
 import type { FastifyPluginAsync } from "fastify";
 
-import LoginBody from "../../schemas/login_body.json";
-import type { LoginBodySchema } from "../../types/login_body";
-
 const userToken = Type.Object({
   token: Type.String(),
 });
@@ -43,29 +40,20 @@ const user: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
    *         description: login success with token
    */
   fastify.post<{
-    Body: LoginBodySchema;
     Reply: UserTokenType;
-  }>(
-    "/login",
-    {
-      schema: {
-        body: LoginBody,
-      },
-    },
-    async (request, reply) => {
-      if (
-        request.body.username === "admin" &&
-        request.body.password === "admin"
-      ) {
-        void reply.send({
-          token: "jwt-token",
-        });
-      } else {
-        // Throw error
-        throw new Error("Invalid credentials");
-      }
+  }>("/login", {}, async (request: any, reply) => {
+    if (
+      request.body.username === "admin" &&
+      request.body.password === "admin"
+    ) {
+      void reply.send({
+        token: "jwt-token",
+      });
+    } else {
+      // Throw error
+      throw new Error("Invalid credentials");
     }
-  );
+  });
 };
 
 export default user;

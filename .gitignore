@@ -71,3 +71,4 @@ dist
 # Eslint cache
 .eslintcache
 stripe.exe
+.vercel

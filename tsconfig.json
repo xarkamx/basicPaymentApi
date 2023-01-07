@@ -6,7 +6,6 @@
   },
   "extends": "fastify-tsconfig",
   "compilerOptions": {
-    "outDir": "dist",
     "esModuleInterop": true,
     "types": [
       "node",
@@ -17,6 +16,7 @@
     "src/**/*.ts",
     "src/services/stripeService.ts",
     "migrations/*.ts",
-    "knexfile.ts"
+    "knexfile.ts",
+    "api/**/*.ts",
   ]
 }

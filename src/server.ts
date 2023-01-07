@@ -6,7 +6,6 @@ import * as dotenv from "dotenv";
 import Fastify from "fastify";
 
 import Db from "./db";
-import { initSwagger } from "./swagger";
 
 // Read the .env file.
 dotenv.config();
@@ -23,12 +22,11 @@ void app.register<{ secret: any }>(jwt, {
   secret: process.env.JWT_SECRET,
 });
 // Register your application as a normal plugin.
-void app.register(import("./app"));
+void app.register(import("."));
 
 // Init graphql
 
 // Init Swagger
-void initSwagger(app);
 
 // Delay is the number of milliseconds for the graceful close to finish
 const closeListeners = closeWithGrace({ delay: 500 }, async (opts: any) => {

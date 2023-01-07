@@ -1,7 +1,6 @@
 import type { FastifyPluginAsync } from "fastify";
 
 import captureSchema from "../../schemas/createPaymentSchema.json";
-import intent from "../../schemas/intent_bodySchema.json";
 import {
   type PaymentDetails,
   StripeAuthorizePayment,
@@ -90,9 +89,6 @@ const stripeApi: FastifyPluginAsync = async (fastify, _opts): Promise<void> => {
   fastify.route({
     method: "POST",
     url: "/intent",
-    schema: {
-      body: intent,
-    },
     async handler(request: any, reply) {
       const { appId } = request.user;
       const stripeService = new StripeAuthorizePayment(appId);
