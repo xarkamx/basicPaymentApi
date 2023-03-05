@@ -5,12 +5,6 @@ import type { Knex } from "knex";
 const config: Record<string, Knex.Config> = {
   development: {
     client: "mysql",
-    connection: {
-      database: "codermx_bpa",
-      user: "codermx_admin",
-      password: "Una pass segura",
-      host: "216.246.112.194",
-    },
   },
 
   staging: {
